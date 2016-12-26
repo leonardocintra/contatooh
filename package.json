@@ -1,0 +1,25 @@
+{
+  "name": "contatooh",
+  "version": "1.0.0",
+  "description": "API de contatos - Aprendendo Mean Stack",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/leonardocintra/contatooh.git"
+  },
+  "keywords": [
+    "contatooh"
+  ],
+  "author": "Leonardo Cintra",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/leonardocintra/contatooh/issues"
+  },
+  "homepage": "https://github.com/leonardocintra/contatooh#readme",
+  "dependencies": {
+    "express": "^4.14.0"
+  }
+}
