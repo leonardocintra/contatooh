@@ -9,9 +9,14 @@ var contatos = [
 
 module.exports = function() {
     var controller =  {};
+    
     controller.listaContatos = function(req, res) {
         res.json(contatos);
     };
+
+    controller.obtemContato = function(req, res) {
+        console.log(req.params.id);
+    }
 
     return controller;
 }
