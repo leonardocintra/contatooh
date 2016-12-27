@@ -1,0 +1,20 @@
+{
+  "name": "contatooh",
+  "description": "API de contatos - Aprendendo Mean Stack",
+  "main": "server.js",
+  "authors": [
+    "Leonardo Cintra"
+  ],
+  "license": "Apache-2.0",
+  "keywords": [
+    "contatooh"
+  ],
+  "homepage": "https://github.com/leonardocintra/contatooh",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
