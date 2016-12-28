@@ -39,3 +39,6 @@ bower_components
 
 # Visual Studio Code
 .vscode
+
+# Contatooh
+public/vendor/
