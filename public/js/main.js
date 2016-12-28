@@ -5,6 +5,13 @@ angular.module('contatooh', ['ngRoute'])
             templateUrl: 'partials/contatos.html',
             controller: 'ContatosController'
         });
+
+        $routeProvider.when('/contatos/:contatoId', {
+            templateUrl: 'partials/contato.html',
+            controller: 'ContatoController'
+        });
+
+        $routeProvider.otherwise({redirectTo: '/contatos'});
 });
 
 // continuar pagina 88
