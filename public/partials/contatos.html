@@ -1,4 +1,30 @@
-<h1>Bem vindo ao Contatooh</h1>
+<div class="jumbotron">
+    <h1 class="text-center">
+        Bem vindo ao Contatooh
+    </h1>
+</div>
 
-<button ng-click="incrementa()">Novo</button>
+<button class="btn btn-primary" ng-click="incrementa()">Novo</button>
+<input ng-model="filtro" type="search" placeholder="pesquisa contato">
 <p>Contatos cadastrados: {{ total }} </p>
+
+<div class="table-responsive">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>E-mail</th>
+                <th>Acao</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="contato in contatos | filter: filtro">
+                <td><a href="#">{{ contato.nome }}</a></td>
+                <td>{{ contato.email }}</td>
+                <td class="text-center">
+                    <button class="btn btn-danger">Remover</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
