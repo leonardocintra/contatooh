@@ -1,4 +1,4 @@
-var contatos = [
+var lstContatoTemp = [
     {_id: 1, nome: 'Contato Hebreu 1', email: 'exemplocontato1@gmail.com'},
     {_id: 2, nome: 'Maria exemplo 2', email: 'exemplocontato2@gmail.com'},
     {_id: 3, nome: 'Contato Laranja 3', email: 'exemplocontato3@gmail.com'},
@@ -11,12 +11,12 @@ module.exports = function() {
     var controller =  {};
     
     controller.listaContatos = function(req, res) {
-        res.json(contatos);
+        res.json(lstContatoTemp);
     };
 
     controller.obtemContato = function(req, res) {
         var idContato = req.params.id;
-        var contato = contatos.filter(function(contato) {
+        var contato = lstContatoTemp.filter(function(contato) {
             return contato._id == idContato;
         })[0];
         contato ? res.json(contato) : res.status(404).send('Contato não encontrado');
@@ -25,8 +25,8 @@ module.exports = function() {
     controller.removeContato = function(req, res) {
         var idContato = req.params.id;
 
-        contatos = contatos.filter(function(Contato) {
-            return contatos._id != idContato;
+        lstContatoTemp = lstContatoTemp.filter(function(Contato) {
+            return lstContatoTemp._id != idContato;
         });
         res.status(204).end();
     }
