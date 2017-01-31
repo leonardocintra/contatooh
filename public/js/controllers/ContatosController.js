@@ -1,6 +1,6 @@
 (function() {
 
-    angular.module('contatooh').controller('ContatosController', {
+    angular.module('contatooh').controller('ContatosController', 
         function($resource, $scope) {
             $scope.contatos = []
             $scope.filtro = ''
@@ -18,8 +18,12 @@
                     }
                 )
             }
-            
+
+            $scope.remove = function(contato) {
+                console.log(contato);
+            }
+
             buscaContatos()
         }
-    })
+    )
 })()
