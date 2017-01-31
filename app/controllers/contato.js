@@ -25,8 +25,8 @@ module.exports = function() {
     controller.removeContato = function(req, res) {
         var idContato = req.params.id;
 
-        lstContatoTemp = lstContatoTemp.filter(function(Contato) {
-            return lstContatoTemp._id != idContato;
+        lstContatoTemp = lstContatoTemp.filter(function(contato) {
+            return contato._id != idContato;
         });
         res.status(204).end();
     }
