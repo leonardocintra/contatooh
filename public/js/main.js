@@ -1,4 +1,4 @@
-angular.module('contatooh', ['ngRoute'])
+angular.module('contatooh', ['ngRoute', 'ngResource'])
     .config(function($routeProvider) {
         
         $routeProvider.when('/contatos', {
@@ -13,5 +13,3 @@ angular.module('contatooh', ['ngRoute'])
 
         $routeProvider.otherwise({redirectTo: '/contatos'});
 });
-
-// continuar pagina 88

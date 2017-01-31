@@ -16,6 +16,15 @@ module.exports = function() {
 
     controller.obtemContato = function(req, res) {
         console.log(req.params.id);
+    };
+
+    controller.removeContato = function(req, res) {
+        var idContato = req.params.id;
+
+        contatos = contatos.filter(function(Contato) {
+            return contatos._id != idContato;
+        });
+        res.status(204).end();
     }
 
     return controller;

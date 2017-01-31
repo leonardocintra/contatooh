@@ -1,19 +1,25 @@
-angular.module('contatooh').controller('ContatosController', 
-    function($scope){
-        $scope.total = 0;
-        $scope.incrementa = function() {
-            $scope.total++;
-        };
+(function() {
 
-        $scope.contatos = [
-            {_id: 1, nome: 'Ronaldo', email: 'exemplocontato1@gmail.com'},
-            {_id: 2, nome: 'Juliana', email: 'exemplocontato2@gmail.com'},
-            {_id: 3, nome: 'Sara', email: 'exemplocontato3@gmail.com'},
-            {_id: 4, nome: 'Humberto', email: 'exemplocontato4@gmail.com'},
-            {_id: 5, nome: 'Diego', email: 'exemplocontato5@gmail.com'},
+    angular.module('contatooh').controller('ContatosController', {
+        function($resource, $scope) {
+            $scope.contatos = []
+            $scope.filtro = ''
 
-        ];
+            var Contato = $resource('/contatos/:id');
 
-        $scope.filtro = "";
-    }
-);
+            function buscaContatos() {
+                Contato.query(
+                    function(contatos) {
+                        $scope.contatos = contatos
+                    },
+                    function(erro) {
+                        console.log("Não foi possivel obter a lista de contatos")
+                        console.log(erro)
+                    }
+                )
+            }
+            
+            buscaContatos()
+        }
+    })
+})()
