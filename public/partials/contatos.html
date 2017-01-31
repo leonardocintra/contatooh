@@ -4,12 +4,20 @@
     </h1>
 </div>
 
+<p ng-show="mensagem.texto">
+    {{ mensagem.texto }}
+</p>
+
 <button class="btn btn-primary" ng-click="incrementa()">Novo</button>
 <input ng-model="filtro" type="search" placeholder="pesquisa contato">
 
 
 <p ng-show="contatos.length">
   Contatos cadastrados: {{ contatos.length }}
+</p>
+
+<p class="text-info" ng-hide="contatos.length">
+    Não há contatos cadastrados
 </p>
 
 <div class="table-responsive">
@@ -23,8 +31,8 @@
         </thead>
         <tbody>
             <tr ng-repeat="contato in contatos | filter: filtro">
-                <td><a href="#">{{ contato.nome }}</a></td>
-                <td>{{ contato.email }}</td>
+                <td><a href="#">{{:: contato.nome }}</a></td>
+                <td>{{:: contato.email }}</td>
                 <td class="text-center">
                     <button ng-click="remove(contato)" class="btn btn-danger">Remover</button>
                 </td>
