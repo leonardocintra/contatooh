@@ -1,58 +1,65 @@
-var lstContatoTemp = [
-    {_id: 1, nome: 'Contato Hebreu 1', email: 'exemplocontato1@gmail.com'},
-    {_id: 2, nome: 'Maria exemplo 2', email: 'exemplocontato2@gmail.com'},
-    {_id: 3, nome: 'Contato Laranja 3', email: 'exemplocontato3@gmail.com'},
-    {_id: 4, nome: 'Ronaldo Camelo 4', email: 'exemplocontato4@gmail.com'},
-    {_id: 5, nome: 'Contato Araujo 5', email: 'exemplocontato5@gmail.com'},
+(function() {
 
-]
+    module.exports = function(app) {
 
-module.exports = function() {
-    var controller =  {};
-    var ID_CONTATO_INC = 5;
-    
-    controller.listaContatos = function(req, res) {
-        res.json(lstContatoTemp);
-    };
+        var Contato = app.models.contato
+        var controller =  {};
+        
+        controller.listaContatos = function(req, res) {
 
-    controller.obtemContato = function(req, res) {
-        var idContato = req.params.id;
-        var contato = lstContatoTemp.filter(function(contato) {
-            return contato._id == idContato;
-        })[0];
-        contato ? res.json(contato) : res.status(404).send('Contato não encontrado');
-    };
+            var promise = Contato.find().exec().then(
+                function(contatos) {
+                    res.json(contatos)
+                }
+            )
+        }
 
-    controller.removeContato = function(req, res) {
-        var idContato = req.params.id;
+        controller.obtemContato = function(req, res) {
+            var _id = req.params.id;
+            Contato.findById(_id).exec().then(
+                function(contato) {
+                    if (!contato) throw new Error ("Contato não encontrado")
+                    res.json(contato)
+                },
+                function(erro) {
+                    console.log(erro)
+                    res.status(404).json(erro)
+                }
+            )
+        }
 
-        lstContatoTemp = lstContatoTemp.filter(function(contato) {
-            return contato._id != idContato;
-        });
-        res.status(204).end();
-    };
+        controller.removeContato = function(req, res) {
+            var idContato = req.params.id;
 
-    controller.salvaContato = function(req, res) {
-        var contato = req.body;
-        lstContatoTemp = contato._id ? atualiza(contato) : adiciona(contato);
-        res.json(contato);
-    };
+            contatos = contatos.filter(function(contato) {
+                return contato._id != idContato;
+            });
+            res.status(204).end();
+        }
 
-    function adiciona(contatoNovo) {
-        contatoNovo._id = 10 + ID_CONTATO_INC;
-        lstContatoTemp.push(contatoNovo);
-        return contatoNovo;
+        controller.salvaContato = function(req, res) {
+            var contato = req.body;
+            contatos = contato._id ? atualiza(contato) : adiciona(contato);
+            res.json(contato);
+        }
+
+        function adiciona(contatoNovo) {
+            contatoNovo._id = 10 + ID_CONTATO_INC;
+            contatos.push(contatoNovo);
+            return contatoNovo;
+        }
+
+        function atualiza(contatoAlterar) {
+            contatos = contatos.map(function(contato) {
+                if (contato._id == contatoAlterar._id) {
+                    contato = contatoAlterar;
+                }
+                return contato;
+            });
+            return contatoAlterar;
+        }
+
+        return controller
     }
 
-    function atualiza(contatoAlterar) {
-        lstContatoTemp = lstContatoTemp.map(function(contato) {
-            if (contato._id == contatoAlterar._id) {
-                contato = contatoAlterar;
-            }
-            return contato;
-        });
-        return contatoAlterar;
-    }
-
-    return controller;
-}
+})()
