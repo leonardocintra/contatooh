@@ -7,7 +7,7 @@
         
         controller.listaContatos = function(req, res) {
 
-            var promise = Contato.find().exec().then(
+            let promise = Contato.find().exec().then(
                 function(contatos) {
                     res.json(contatos)
                 }
@@ -15,7 +15,7 @@
         }
 
         controller.obtemContato = function(req, res) {
-            var _id = req.params.id;
+            let _id = req.params.id;
             Contato.findById(_id).exec().then(
                 function(contato) {
                     if (!contato) throw new Error ("Contato não encontrado")
@@ -29,34 +29,49 @@
         }
 
         controller.removeContato = function(req, res) {
-            var idContato = req.params.id;
-
-            contatos = contatos.filter(function(contato) {
-                return contato._id != idContato;
-            });
-            res.status(204).end();
+            let _id = req.params.id
+            Contato.remove({"_id": _id}).exec().then(
+                function() {
+                    res.status(204).end() 
+                },
+                function(erro) { 
+                    return console.error(erro)
+                }
+            )
         }
 
         controller.salvaContato = function(req, res) {
-            var contato = req.body;
-            contatos = contato._id ? atualiza(contato) : adiciona(contato);
-            res.json(contato);
-        }
+            /**   Um Model do Mongoose possui a função update , porém ela ape-
+               nas atualiza o documento sem retorná-lo após a modificação. A função
+               findByIdAndUpdate , além de atualizar, nos dá acesso ao documento
+               atualizado. */
 
-        function adiciona(contatoNovo) {
-            contatoNovo._id = 10 + ID_CONTATO_INC;
-            contatos.push(contatoNovo);
-            return contatoNovo;
-        }
+            let _id = req.body._id
 
-        function atualiza(contatoAlterar) {
-            contatos = contatos.map(function(contato) {
-                if (contato._id == contatoAlterar._id) {
-                    contato = contatoAlterar;
-                }
-                return contato;
-            });
-            return contatoAlterar;
+            if (_id) {
+                // IF = possui um id, é UPDATE
+                Contato.findByIdAndUpdate(_id, req.body).exec().then(
+                    function(contato) {
+                        res.json(contato)
+                    },
+                    function(erro) {
+                        console.error(erro)
+                        res.status(500).json(erro)
+                    }
+                )
+            } 
+            else {
+                // ELSE = não possui _id, é um INSERT
+                Contato.create(req.body).then(
+                    function(contato) {
+                        res.status(200).json(contato)
+                    },
+                    function(erro) {
+                        console.log(erro)
+                        res.status(500).json(erro)
+                    }
+                )                
+            }
         }
 
         return controller
