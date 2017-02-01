@@ -9,6 +9,7 @@ var lstContatoTemp = [
 
 module.exports = function() {
     var controller =  {};
+    var ID_CONTATO_INC = 5;
     
     controller.listaContatos = function(req, res) {
         res.json(lstContatoTemp);
@@ -29,6 +30,28 @@ module.exports = function() {
             return contato._id != idContato;
         });
         res.status(204).end();
+    };
+
+    controller.salvaContato = function(req, res) {
+        var contato = req.body;
+        lstContatoTemp = contato._id ? atualiza(contato) : adiciona(contato);
+        res.json(contato);
+    };
+
+    function adiciona(contatoNovo) {
+        contatoNovo._id = 10 + ID_CONTATO_INC;
+        lstContatoTemp.push(contatoNovo);
+        return contatoNovo;
+    }
+
+    function atualiza(contatoAlterar) {
+        lstContatoTemp = lstContatoTemp.map(function(contato) {
+            if (contato._id == contatoAlterar._id) {
+                contato = contatoAlterar;
+            }
+            return contato;
+        });
+        return contatoAlterar;
     }
 
     return controller;
