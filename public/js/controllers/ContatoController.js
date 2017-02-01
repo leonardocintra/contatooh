@@ -3,6 +3,7 @@
     angular.module('contatooh').controller('ContatoController', 
         function($scope, $routeParams, Contato) {
 
+            /** Scope que mostra o contato novo ou existente */
             if ($routeParams.contatoId) {
                 Contato.get(
                     {id: $routeParams.contatoId},
@@ -14,10 +15,12 @@
                         console.log(erro)
                     }
                 )
-            } else {
+            } 
+            else {
                 $scope.contato = new Contato()
             }
 
+            /** Scope salvar */
             $scope.salva = function() {
                 $scope.contato.$save()
                     .then(() => {
@@ -29,6 +32,13 @@
                         $scope.mensagem = {texto: 'Não foi possivel salvar.'}
                     })
             }
+
+            /** Lista os contatos para vincular numa emergencia */
+            Contato.query(function(contatos) {
+                $scope.contatos = contatos
+            })
+
+
         }
     )
 

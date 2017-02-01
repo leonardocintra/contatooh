@@ -7,7 +7,7 @@
         
         controller.listaContatos = function(req, res) {
 
-            let promise = Contato.find().exec().then(
+            let promise = Contato.find().populate('emergencia').exec().then(
                 function(contatos) {
                     res.json(contatos)
                 }
@@ -47,6 +47,8 @@
                atualizado. */
 
             let _id = req.body._id
+
+            req.body.emergencia = req.body.emergencia || null
 
             if (_id) {
                 // IF = possui um id, é UPDATE
