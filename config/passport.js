@@ -8,11 +8,13 @@
     module.exports = () => {
 
         const Usuario = mongoose.model('Usuario')
+        const clientID = process.env.CLIENT_ID || 'suaClientIdAqui'
+        const clientSecret = process.env.CLIENT_SECRET || 'suaSecretekeyAqui'
 
         passport.use(new GitHubStrategy({
 
-            clientID: 'suaClientIdAqui',
-            clienteSecret: 'suaSecretKeyAqui',
+            clientID: clientID,
+            clientSecret: clientSecret ,
             callbackURL: 'http://localhost:3000/auth/github/callback'
 
         }, function(accessToken, refreshToken, profile, done) {

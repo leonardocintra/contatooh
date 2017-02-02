@@ -25,12 +25,17 @@ nodemon server.js
 ```
 
 ## Login / Auth
-Voce precisa ter uma conta no github.
-Entrar em configurações e criar uma app
 
-Entrar em `config/passport.js` e informar suas credenciais
+Voce precisa ter uma conta no github.
+Entrar em configurações e criar uma app no link https://github.com/settings/developers
 
 ![image](https://cloud.githubusercontent.com/assets/5832193/22551545/4a2c206a-e93c-11e6-9d9a-3c55e62cd188.png)
+
+Entrar em `config/passport.js` e informar suas credenciais ou
+```
+export CLIENT_ID=blablabla
+export CLIENT_SECRET=blablabla
+```
 
 
 # Meta
