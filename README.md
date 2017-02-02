@@ -1,8 +1,17 @@
 # Contatooh
 
+## O projeto
+```
+git clone https://github.com/leonardocintra/contatooh
+cd contatooh
+```
+
 ## Instalacao
 
 Instale as dependencias
+
+- NPM
+- NodeJs
 
 ```
 npm install
