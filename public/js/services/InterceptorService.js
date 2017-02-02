@@ -2,8 +2,9 @@
 
     angular.module('contatooh').factory('meuInterceptor', function($location, $q) {
         
-        const interceptor = {
+        var interceptor = {
             responseError: function(resposta) {
+
                 if (resposta.status == 401) {
                     $location.path('/auth')
                 }
