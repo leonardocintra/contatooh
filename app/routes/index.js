@@ -4,13 +4,20 @@
      * porque estamos utilizando o express-load , que já o carregará automaticamente */
 
     module.exports = function(app) {
-        app.get('/'), function(req, res) {
-            var usuarioLogado = ''
+        app.get('/', function(req, res) {
+            
+            let usuarioLogado = ''
+            
             if (req.user) {
-                usuarioLogado = req.user.login
+                usuarioLogado = req.user.login 
             }
-            res.render('index', { "usuarioLogado" : usuarioLogado })
-        }
+            
+            context = {
+                usuarioLogado: usuarioLogado
+            }
+
+            res.render('index', context)
+        })
     }
 
 })()

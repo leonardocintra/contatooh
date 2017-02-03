@@ -8,8 +8,8 @@
     module.exports = () => {
 
         const Usuario = mongoose.model('Usuario')
-        const clientID = process.env.CLIENT_ID || 'suaClientIdAqui'
-        const clientSecret = process.env.CLIENT_SECRET || 'suaSecretekeyAqui'
+        const clientID = process.env.CLIENT_ID || 'bf4424fb17717ae36f87'
+        const clientSecret = process.env.CLIENT_SECRET || 'c692f2f56a32aff3ee7b0af34e03ec277864ce0c'
 
         passport.use(new GitHubStrategy({
 
