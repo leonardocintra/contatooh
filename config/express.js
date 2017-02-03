@@ -6,6 +6,7 @@
     const cookieParser = require('cookie-parser')
     const session = require('express-session')
     const passport = require('passport')
+    const helmet = require('helmet')
 
 
 
@@ -33,6 +34,14 @@
         ))
         app.use(passport.initialize())
         app.use(passport.session())
+        
+        /** Helmet - Proteções */
+        app.use(helmet())
+        app.use(helmet.hidePoweredBy({ setTo: 'PHP 5.5.14' })) // enganar o invasor
+        app.use(helmet.frameguard({ action: 'sameorigin' })) // bloquaer <iframe> externo
+        app.use(helmet.xssFilter())
+        app.use(helmet.noSniff())
+        app.disable('x-powered-by')
 
 
         /*
