@@ -2,6 +2,8 @@
 
     module.exports = function(app) {
 
+        const sanitize = require('mongo-sanitize')
+
         var Contato = app.models.contato
         var controller =  {};
         
@@ -15,7 +17,7 @@
         }
 
         controller.obtemContato = function(req, res) {
-            let _id = req.params.id;
+            let _id = sanitize(req.params.id)
             Contato.findById(_id).exec().then(
                 function(contato) {
                     if (!contato) throw new Error ("Contato não encontrado")
@@ -29,7 +31,7 @@
         }
 
         controller.removeContato = function(req, res) {
-            let _id = req.params.id
+            let _id = sanitize(req.params.id)
             Contato.remove({"_id": _id}).exec().then(
                 function() {
                     res.status(204).end() 
@@ -48,11 +50,17 @@
 
             let _id = req.body._id
 
-            req.body.emergencia = req.body.emergencia || null
+            /** Idenpendente da quantidade de parametros, apenas selecionamos o nome, email e emergencia */
+
+            let dados = {
+                "nome": req.body.nome,
+                "email": req.body.email,
+                "emergencia": req.body.emergencia || null
+            }
 
             if (_id) {
                 // IF = possui um id, é UPDATE
-                Contato.findByIdAndUpdate(_id, req.body).exec().then(
+                Contato.findByIdAndUpdate(_id, dados).exec().then(
                     function(contato) {
                         res.json(contato)
                     },
@@ -64,7 +72,7 @@
             } 
             else {
                 // ELSE = não possui _id, é um INSERT
-                Contato.create(req.body).then(
+                Contato.create(dados).then(
                     function(contato) {
                         res.status(200).json(contato)
                     },
