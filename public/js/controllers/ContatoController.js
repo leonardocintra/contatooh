@@ -23,12 +23,12 @@
             /** Scope salvar */
             $scope.salva = function() {
                 $scope.contato.$save()
-                    .then(() => {
+                    .then(function() {
                         $scope.mensagem = {texto: 'Salvo com sucesso'}
                         // limpa o formulario
                         $scope.contato = new Contato()
                     })
-                    .catch(() => {
+                    .catch(function() {
                         $scope.mensagem = {texto: 'Não foi possivel salvar.'}
                     })
             }
