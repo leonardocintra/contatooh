@@ -5,7 +5,7 @@
 
     module.exports = function(app) {
         app.get('/'), function(req, res) {
-            let usuarioLogado = ''
+            var usuarioLogado = ''
             if (req.user) {
                 usuarioLogado = req.user.login
             }
