@@ -3,15 +3,25 @@
     /** recebe o objeto grunt como parametro */
     module.exports = function(grunt) {
         grunt.initConfig({
-            tarefa1: {
-                /** configuracao da tarefa 1 */
+            copy: {
+                project: {
+                    expand: true,
+                    cwd: '.',
+                    src: ['**', '!Gruntfile.js', '!package.json', '!bower.json'],
+                    dest: 'dist'
+                }
             },
-            tarefa2: {
-                /** configuracao da tarefa 2 */
+            clean: {
+                dist: {
+                    src: 'dist'
+                }
             }
         })
 
+        grunt.registerTask('default', ['dist'])
+        grunt.registerTask('dist', ['clean', 'copy'])
         grunt.loadNpmTasks('grunt-contrib-copy')
+        grunt.loadNpmTasks('grunt-contrib-clean')
     }
 
 })()
