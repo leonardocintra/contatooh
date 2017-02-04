@@ -1,25 +1,32 @@
 (function() {
 
-    angular.module('meusComponentes', []).directive('meuPainel', function() {
-        let directive = {}
+    angular.module('meusComponentes', [])
+        .directive('meuPainel', function() {
+            let directive = {}
 
-        directive.restrict = "EA"
-        directive.scope = {
-            titulo: '@'
-        }
+            directive.restrict = "EA"
+            directive.scope = {
+                titulo: '@'
+            }
 
-        directive.transclude = true
+            directive.transclude = true
+            directive.templateUrl = 'js/directives/meus-componentes/meu-painel.html'
 
-        directive.template = `
-            <div class="panel panel-default">
-                <div class="panel-heading">{{ titulo }}</div>
-                <div class="panel-body" ng-transclude >
+            return directive
+        })
+        .directive('meuBotaoAviso', function() {
+            let directive = {}
 
-                </div>
-            </div>
-        `
+            directive.restrict = "E"
+            directive.scope = {
+                nome: '@',
+                acao: '&'
+            }
+            directive.template = `
+                <button ng-click="acao()" class="btn btn-danger">{{ nome }}</button>
+            `
 
-        return directive
-    })
+            return directive
+        })
 
 })()
