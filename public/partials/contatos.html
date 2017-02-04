@@ -23,26 +23,28 @@
         Não há contatos cadastrados
     </p>
 
-    <div class="table-responsive">
-        <table class="table table-hover">
-            <thead>
-                <tr>
-                    <th>Nome</th>
-                    <th>E-mail</th>
-                    <th>Emergencia</th>
-                    <th>Acao</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr ng-repeat="contato in contatos | filter: filtro">
-                    <td><a ng-href="#!/contato/{{ contato._id }}">{{:: contato.nome }}</a></td>
-                    <td>{{:: contato.email }}</td>
-                    <th>{{:: contato.emergencia.nome }}</th>
-                    <td class="text-center">
-                        <button ng-click="remove(contato)" class="btn btn-danger">Remover</button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+    <meu-painel titulo="Listagem de contatos">
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>E-mail</th>
+                        <th>Emergencia</th>
+                        <th>Acao</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="contato in contatos | filter: filtro">
+                        <td><a ng-href="#!/contato/{{ contato._id }}">{{:: contato.nome }}</a></td>
+                        <td>{{:: contato.email }}</td>
+                        <th>{{:: contato.emergencia.nome }}</th>
+                        <td class="text-center">
+                            <button ng-click="remove(contato)" class="btn btn-danger">Remover</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </meu-painel>
 </div>
