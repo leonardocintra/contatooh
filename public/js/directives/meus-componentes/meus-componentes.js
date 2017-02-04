@@ -48,19 +48,15 @@
 
             directive.restrict = "A"
             directive.scope = {
-                focus: '='
+                evento: '@'
             }
 
             directive.link = function(scope, element) {
-                /**Na função passada como segundo parâmetro, temos acesso ao valor
-                atual e antigo do elemento monitorado:
-                scope.$watch('focus', function(valorAtual, valorAntigo) {
-                }); */
-                scope.$watch('focus', function() {
-                    if (scope.focus) {
-                        element[0].focus()
-                        scope.focus = false
-                    }
+                /**O primeiro parâmetro da função $on é o nome do evento que desejamos
+                escutar, o segundo, uma função de callback executada toda vez que o evento é
+                disparado. */
+                scope.$on(scope.evento, function() {
+                    element[0].focus()
                 })
             }
             return directive
