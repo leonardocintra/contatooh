@@ -27,6 +27,7 @@
                         $scope.mensagem = {texto: 'Salvo com sucesso'}
                         // limpa o formulario
                         $scope.contato = new Contato()
+                        $scope.btnBackFocus = true
                     })
                     .catch(function() {
                         $scope.mensagem = {texto: 'Não foi possivel salvar.'}
