@@ -8,10 +8,12 @@
             titulo: '@'
         }
 
+        directive.transclude = true
+
         directive.template = `
             <div class="panel panel-default">
                 <div class="panel-heading">{{ titulo }}</div>
-                <div class="panel-body">
+                <div class="panel-body" ng-transclude >
 
                 </div>
             </div>
