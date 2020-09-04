@@ -29,7 +29,7 @@
     "helmet": "^3.4.0",
     "method-override": "^2.3.7",
     "mongo-sanitize": "^1.0.0",
-    "mongodb": "^2.2.22",
+    "mongodb": "^3.6.1",
     "mongoose": "^5.7.8",
     "mongoose-findorcreate": "^1.0.0",
     "passport": "^0.3.2",
